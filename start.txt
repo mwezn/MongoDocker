@@ -1,0 +1,16 @@
+to start: sudo docker-compose up
+to stop: sudo docker-compose down --volumes --remove-orphans
+
+1)
+sudo docker run --name shelter-db --mount type=bind,source="$(pwd)",dst="/code" -d mongo:4-focal
+sudo docker exec -it shelter-db mongo
+load('code/db/setup.js') 
+
+2) Will try the following to connect to my database
+sudo docker run --name shelter-db --mount type=bind,source="$(pwd)",dst="/code" -d mongo:4-focal
+sudo docker exec -it shelter-db mongo "mongodb+srv://cluster0.zyaiu.mongodb.net/Cluster0" --username MrMikes
+
+
+3)
+sudo docker exec -it server-mongodb_db_1 mongo -u futureproof -p shelterpass (then type in dockercompose password)
+//YES THE LAST LINE WORKS! :)
