@@ -7,8 +7,8 @@ services:
     ports: 
       - 8080:8080
     environment: 
-      - DB_NAME=shelter
-      - DB_CONNECTION=mongodb://futureproof:shelterpass@db:27017
+      - DB_NAME=todousers
+      - DB_CONNECTION=mongodb://admin:randompass@db:27017
     depends_on:
       - db
     volumes:
@@ -23,8 +23,8 @@ services:
       - "dbdata:/var/lib/mongodb/data"
       - "./db/userseeds.js:/docker-entrypoint-initdb.d/userseeds.js:ro"
     environment: 
-      - MONGO_INITDB_ROOT_USERNAME=futureproof
-      - MONGO_INITDB_DATABASE=shelter
-      - MONGO_INITDB_ROOT_PASSWORD=shelterpass
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_DATABASE=todousers
+      - MONGO_INITDB_ROOT_PASSWORD=randompass
 volumes:
   dbdata:

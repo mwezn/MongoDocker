@@ -1,4 +1,4 @@
-const db = connect("mongodb://localhost:27017/shelter")
+const db = connect("mongodb://localhost:27017/todousers")
 
 db.users.insertMany([
     {email:'m.w.g.nelson@gmail.com',username:"mike",password:111,

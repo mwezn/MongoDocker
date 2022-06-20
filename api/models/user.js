@@ -28,11 +28,11 @@ class User {
         return new Promise (async (resolve, reject) => {
             try {
                 const db = await init();
-                let userData = await db.collection('users').find({ email: email}).toArray()
-                //let dog = new Dog({...dogData[0], id: dogData[0]._id});
+                let userData = await db.collection('users').find({ 'email': email}).toArray()
+                let user = new User({...userData[0], id: userData[0]._id});
                 resolve (userData);
             } catch (err) {
-                reject('Dog not found');
+                reject('User not found');
             }
         });
     }
