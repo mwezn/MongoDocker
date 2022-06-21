@@ -6,9 +6,9 @@ class User {
         this.email= data.email
         this.username=data.username
         this.password=data.password
-        this.log=[]
-        this.overdue=[]
-        this.done=[]
+        this.log=data.log?data.log:[]
+        this.overdue=data.overdue?data.overdue:[]
+        this.done=[]=data.done?data.done:[]
     }
     static get all() {
         return new Promise (async (resolve, reject) => {
@@ -41,13 +41,10 @@ class User {
            try {
               const db = await init();
               console.log("hello I'm into create function")
-              let newuser= await db.collection('users').insertOne({
-                 username: data.username, 
-                 email: data.email, 
-                 password: data.password
-              })
-              // let newUser = new User(user.ops[0]);
-              console.log("This is the user has been created into models/User.js")
+              let newUser= new User({...data})
+              console.log(newUser)
+              let newuser= await db.collection('users').insertOne(newUser)
+        
               console.log(newuser)
               res(`user created succesfully`)
   
@@ -56,6 +53,23 @@ class User {
            }
         })
      }
+     static update(doc,update) {
+        return new Promise (async (res, rej) => {
+           try {
+              const db = await init();
+              let updatedLogData = await db.collection('users').findOneAndUpdate(doc, update, { returnOriginal: false })
+                let updatedLog = new User(updatedLogData.value);
+                res(updatedLog);
+  
+           } catch (err) {
+              rej(`Error creating user: ${err}`);
+           }
+        })
+     }
 
 }
+
+/*let updatedDogData = await db.collection('dogs').findOneAndUpdate({ _id: ObjectId(this.id) }, { $inc: { age: 1 } }, { returnOriginal: false })
+                let updatedDog = new Dog(updatedDogData.value);
+                resolve (updatedDog);*/
 module.exports= User;

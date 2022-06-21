@@ -39,14 +39,7 @@ router.post('/register', async (req, res) => {
       if(checkemail.length!==0) {
           return res.status(400).send("Email already exists")
       }
-
-      //The code inside the catch(err) below was originally here
-      //But because our findByEmail function raises errors 
-      //for users that DONT exist..in this case the error means
-      //our user can be created!!
-      //Perhaps this is not the right way to do this?
-
-   } catch(err){
+    } catch(err){
        console.log(err)
        const salt = await bcrypt.genSalt();
        const hashed = await bcrypt.hash(req.body.data.password, salt)
@@ -59,7 +52,6 @@ router.post('/register', async (req, res) => {
        }
        res.status(200).json({msg: 'User created',newuser: result})
    }
-  
 })
 
 module.exports=router;
