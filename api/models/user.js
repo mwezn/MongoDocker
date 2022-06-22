@@ -15,7 +15,7 @@ class User {
             try {
                 const db = await init()
                 const userData = await db.collection('users').find().toArray()
-                const users = userData.map(d => new User({ ...d}))
+                const users = userData.map(d => new User({ ...d, id: d._id}))
                 resolve(users);
             } catch (err) {
                 console.log(err);
@@ -41,18 +41,18 @@ class User {
            try {
               const db = await init();
               console.log("hello I'm into create function")
-              let newUser= new User({...data})
-              console.log(newUser)
-              let newuser= await db.collection('users').insertOne(newUser)
-        
-              console.log(newuser)
-              res(`user created succesfully`)
+              
+              let newuser= await db.collection('users').insertOne(data)
+              console.log(newuser.ops[0]);
+              let newUser= new User(newuser.ops[0])
+              res(newUser)
   
            } catch (err) {
               rej(`Error creating user: ${err}`);
            }
         })
      }
+
      static update(doc,update) {
         return new Promise (async (res, rej) => {
            try {
