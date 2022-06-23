@@ -4,7 +4,7 @@ const request= supertest(app)
 
 describe('api test', () => {
     it('It gets all users endpoint', async ()=> {
-        const res = await request.get("/users");
+        const res = await request.get("/");
         expect(res.statusCode).toBe(200)
     });
     it('It gets habits by username', async ()=>{

@@ -1,20 +1,20 @@
 version: '3'
 services:
   server:
-    container_name: debug_test_api
+    container_name: api_test
     working_dir: /code
     depends_on:
       - db
     ##command: bash -c "cd server && npm install && npm test"
     tty: true
   db:
-    container_name: debug_test_db
+    container_name: db_test
     volumes:
       - "test_db:/var/lib/mongodb/data"
     environment: 
-      - MONGO_INITDB_ROOT_USERNAME=futureproof
-      - MONGO_INITDB_DATABASE=users
-      - MONGO_INITDB_ROOT_PASSWORD=userpass
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_DATABASE=todousers
+      - MONGO_INITDB_ROOT_PASSWORD=randompass
 volumes:
   test_db:
 networks: 

@@ -1,6 +1,6 @@
-  
 version: '3'
 services:
+
   server:
     image: node:12.18.4
     working_dir: /code
@@ -15,7 +15,7 @@ services:
       - type: bind
         source: ./api
         target: /code
-    command: bash -c "npm install && npm start"
+    ##command: bash -c "npm install && npm start"
 
   db:
     image: mongo:4-focal #I can only run mongo below v5

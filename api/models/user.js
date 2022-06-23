@@ -32,7 +32,7 @@ class User {
                 let user = new User({...userData[0], id: userData[0]._id});
                 resolve(user);
             } catch (err) {
-                reject('Email not found');
+                reject("Email not found");
             }
         });
     }
