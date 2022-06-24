@@ -11,8 +11,6 @@ router.post('/addTodo', async (req, res)=>{
         const usersData = await User.update(query,update) 
         console.log(usersData)
         return res.status(200).json(usersData); 
-        
-
     } catch(e){
         res.json(e)
     }

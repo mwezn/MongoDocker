@@ -34,6 +34,9 @@ router.post('/login', async (req, res)=>{
 })
 
 router.post('/register', async (req, res) => {
+    const user=req.body.data.user;
+    const email=req.body.data.email;
+    const password=req.body.data.password.toString()
   try {
       const checkemail = await User.findByEmail(req.body.data.email)
       if(checkemail.length!==0) {
@@ -42,9 +45,9 @@ router.post('/register', async (req, res) => {
     } catch(err){
        console.log(err)
        const salt = await bcrypt.genSalt();
-       const hashed = await bcrypt.hash(req.body.data.password, salt)
+       const hashed = await bcrypt.hash(password, salt)
        console.log(hashed)
-       const data = {username: req.body.data.user, email: req.body.data.email, password: hashed}
+       const data = {username: user, email: email, password: hashed}
        console.log(data)
        const result = await User.create(data)
        if (!result){
@@ -53,5 +56,15 @@ router.post('/register', async (req, res) => {
        res.status(200).json({msg: 'User created',newuser: result})
    }
 })
+
+router.delete('/:id', async (req, res)=>{
+    try {
+        const d = await User.delete({_id: req.params.id})
+        res.json(d)
+    } catch(err) {
+        res.status(500).json({err})
+    }
+  })
+  
 
 module.exports=router;

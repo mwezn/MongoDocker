@@ -7,14 +7,16 @@ describe('api test', () => {
         const res = await request.get("/");
         expect(res.statusCode).toBe(200)
     });
-    it('It gets habits by username', async ()=>{
-        const res=await request.get("/habits/isabel")
-        expect(res.statusCode).toBe(200)
+    it('Cant register with taken emails', async ()=>{
+        let body={data:{user: "random", email: "test@gmail.com", password: 111}}
+        const res=await request.post("/register")
+           .send(body)
+        expect(res.statusCode).toBe(400)
     })
     it('Cant login with unknown emails', async ()=>{
-        const body = {username: "random", email: "test@gmail.com", password: 111}
-        const res=await request.post("/auth/login")
+        const body = {data: {email: "test1@gmail.com", password: 111}}
+        const res=await request.post("/login")
            .send(body)
-        expect(res.statusCode).toBe(401)
+        expect(res.statusCode).toBe(400)
     })
 });

@@ -66,6 +66,19 @@ class User {
            }
         })
      }
+     static delete(query){
+         return new Promise (async (res, rej)=>{
+            try {
+                const db = await init();
+                let updatedLogData = await db.collection('users').findOneAndDelete(query)
+                  res(updatedLogData);
+    
+             } catch (err) {
+                rej(`Error deleting user: ${err}`);
+             }
+
+         })
+     }
 
 }
 
