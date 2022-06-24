@@ -82,7 +82,4 @@ class User {
 
 }
 
-/*let updatedDogData = await db.collection('dogs').findOneAndUpdate({ _id: ObjectId(this.id) }, { $inc: { age: 1 } }, { returnOriginal: false })
-                let updatedDog = new Dog(updatedDogData.value);
-                resolve (updatedDog);*/
 module.exports= User;
