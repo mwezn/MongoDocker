@@ -59,7 +59,7 @@ router.post('/register', async (req, res) => {
 
 router.delete('/:id', async (req, res)=>{
     try {
-        const d = await User.delete({_id: req.params.id})
+        const d = await User.delete({id: req.params.id})
         res.json(d)
     } catch(err) {
         res.status(500).json({err})

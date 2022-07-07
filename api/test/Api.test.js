@@ -19,4 +19,11 @@ describe('api test', () => {
            .send(body)
         expect(res.statusCode).toBe(400)
     })
+    it('Adds todos for correct user', async()=>{
+        const body={data: {todo: ["Addme"]}}
+        const res= await request.post("/addTodo")
+    })
+    it('Can delete user', async()=>{
+        const res=await request.delete("/:id")
+    })
 });
