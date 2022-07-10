@@ -79,7 +79,23 @@ class User {
 
          })
      }
+     static async updateEach(){
+               let time=new Date();
+               let T=time.toISOString();
+               let GMT= time.toLocaleTimeString([],{hour:'2-digit', minute:'2-digit',hour12:false})
+                const db = await init();
+                let updatedLogData = await db.collection('users').find({}).forEach(function(d) {
+                    console.log(d)
+                    d.overdue = d.log.filter(function(v) { return v.date==T.slice(0,10) && v.time < GMT })
+                    console.log(d)
+                    //d.Information = d.Information.filter(function(v) { return v.id != 101 })
+                    db.collection('users').save(d)
+                })
+                return updatedLogData
+               
+            }
+    }
 
-}
+
 
 module.exports= User;

@@ -16,10 +16,9 @@ describe('User', () => {
   it('Inserts a new user doc into collection', async () => {
     await User.delete({email: "johnsemail@mail.com"})
     const mockUser = {email:"johnsemail@mail.com", username: 'John', password:"12345",log:[], overdue:[], done:[]};
-    const result = await User.create(mockUser)
-
+    const result = await User.create(mockUser);
     const insertedUser = await User.findByEmail('johnsemail@mail.com');
-    expect(insertedUser).toEqual(mockUser);
+    expect(insertedUser).toEqual(result);
   });
 
 });

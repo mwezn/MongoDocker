@@ -22,6 +22,7 @@ describe('api test', () => {
     it('Adds todos for correct user', async()=>{
         const body={data: {todo: ["Addme"]}}
         const res= await request.post("/addTodo")
+            .send(body)
     })
     it('Can delete user', async()=>{
         const res=await request.delete("/:id")
